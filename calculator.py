@@ -1,3 +1,5 @@
+from fraction import Fraction
+
 class Calculator:
     ''' represent a calculator that holds a collection of fractions that can be
     operated on (add/subtract/divide/multiply)'''

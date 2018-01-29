@@ -1,4 +1,4 @@
-import calculator
+
 
 class Fraction:
     ''' represents a fraction in the calculator'''
