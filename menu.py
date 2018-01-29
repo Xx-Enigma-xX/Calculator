@@ -33,13 +33,25 @@ class Menu:
 
     def run(self):
         ''' Display the menu and respond to choices.'''
-        self.display_menu()
-        userInput = input()
-        # userInput = '1'
-        # print(self.choice)
-        self.choice[userInput]()
+        result = ""
+        while True:
+            self.display_menu()
+            userInput = input()
+            # userInput = '1'
+            # print(self.choice)
+            ans = ""
+            while True:
+                try:
+                    result = self.choice[userInput](ans, result)
+                except Exception as e:
+                    print("Fail " + str(e))
+                if input('Do you want to continue(y/n) ').lower() == "n":
+                    break
+                else:
+                    ans = "ANS"
 
-    def new_session(self):
+
+    def new_session(self, *args):
         ''' a session represents the screen you see when you open
         a calculator program on linux or windows. (or a physical one!)
 
@@ -66,7 +78,9 @@ class Menu:
         functions from the Calculator class.
 
         '''
-        userInput = input('Enter your mathematical expression: ')
+        userInput = input('Enter your mathematical expression: ' + args[0])
+        if args[0] == "ANS" and not args[1] == "":
+            userInput = "(%s/%s)" % (args[1].numerator, args[1].denominator) + userInput
         # userInput = '(15/4)+(12/13)'
         fractions = self.fractionRegex.findall(userInput)
         # print(fractions)
@@ -89,6 +103,7 @@ class Menu:
             print("(%s/%s)" % (result.numerator, result.denominator))
         else:
             print("Incorrect input.")
+        return result
 
     def quit():
         sys.exit(0)
