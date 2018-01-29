@@ -10,7 +10,7 @@ class Menu:
     def __init__(self):
         print("initialized")
         self.fractionRegex = re.compile(r'\((\d+)/(\d+)\)')
-        self.signRegex = re.compile(r'[+|-|*]')
+        self.signRegex = re.compile(r'[\+|\-|\*]')
         # self.calculator = calculator.Calculator()
         self.choice = {
                 "1": self.new_session,
@@ -34,8 +34,8 @@ class Menu:
     def run(self):
         ''' Display the menu and respond to choices.'''
         self.display_menu()
-        # userInput = input()
-        userInput = '1'
+        userInput = input()
+        # userInput = '1'
         # print(self.choice)
         self.choice[userInput]()
 
@@ -66,13 +66,15 @@ class Menu:
         functions from the Calculator class.
 
         '''
-        # userInput = input('Enter your mathematical expression: ')
-        userInput = '(15/4)+(12/13)'
+        userInput = input('Enter your mathematical expression: ')
+        # userInput = '(15/4)+(12/13)'
         fractions = self.fractionRegex.findall(userInput)
-        fraction1 = Fraction(fractions[0], fractions[1])
-        fraction2 = Fraction(fractions[0], fractions[1])
+        # print(fractions)
+        fraction1 = Fraction(fractions[0][0], fractions[0][1])
+        fraction2 = Fraction(fractions[1][0], fractions[1][1])
         self.calculator = calculator.Calculator(fraction1, fraction2)
         sign = self.signRegex.findall(userInput)
+        # print(sign)
         if sign == None:
             result = self.calculator.divide()
             print("(%s/%s)" % (result.numerator, result.denominator))

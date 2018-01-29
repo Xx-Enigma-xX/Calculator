@@ -3,8 +3,8 @@
 class Fraction:
     ''' represents a fraction in the calculator'''
     def __init__(self, numerator, denominator):
-        self.numerator = numerator
-        self.denominator = denominator
+        self.numerator = int(numerator)
+        self.denominator = int(denominator)
         # self.simplify()
 
     def simplify(self):
